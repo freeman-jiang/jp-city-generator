@@ -91,7 +91,7 @@ export function Main() {
             <Button
               onClick={generateCities}
               disabled={regenerating}
-              className={`w-48 h-12 flex items-center justify-center gap-2 transition-all duration-300 ${
+              className={`sm:w-48 w-56 sm:h-12 h-14 flex items-center justify-center gap-2 transition-all duration-300 ${
                 regenerating
                   ? "scale-95 opacity-70"
                   : "hover:scale-105 hover:rotate-1"
@@ -101,7 +101,9 @@ export function Main() {
                 className={`${regenerating ? "animate-ping" : ""}`}
                 size={16}
               />
-              {regenerating ? "Generating..." : "Make more"}
+              <span className="sm:text-base text-lg">
+                {regenerating ? "Generating..." : "Make more"}
+              </span>
             </Button>
           </ProgressiveLoad>
         </div>
@@ -115,7 +117,7 @@ export function Main() {
       </div>
       <ProgressiveLoad
         delay={600}
-        className="mt-auto pt-24 text-xs text-zinc-600 text-center w-full"
+        className="mt-auto pt-20 text-xs text-zinc-600 text-center w-full"
       >
         This model is a tiny (40K parameter){" "}
         <a
@@ -125,6 +127,17 @@ export function Main() {
           multilayer perceptron
         </a>{" "}
         running fully locally using the ONNX Runtime.
+        <div>
+          Trained on only <span className="font-semibold">1915</span> Japanese
+          city names from the{" "}
+          <a
+            href="https://www.soumu.go.jp/denshijiti/code.html"
+            className="underline"
+          >
+            Ministry of Internal Affairs and Communications
+          </a>
+          .
+        </div>
       </ProgressiveLoad>
     </div>
   );
