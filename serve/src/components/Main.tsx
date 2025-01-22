@@ -68,7 +68,7 @@ export function Main() {
       </ProgressiveLoad>
       <ProgressiveLoad>
         <div className="text-xs uppercase tracking-widest text-zinc-500 mt-1">
-          Japanese City Generator
+          Infinite Japanese City Generator
         </div>
       </ProgressiveLoad>
       <ProgressiveLoad delay={100}>
