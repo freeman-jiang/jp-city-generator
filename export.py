@@ -5,7 +5,7 @@ import torch.nn.functional as F
 import torch.onnx
 from torch import nn
 
-from train_full import FinalMLP, block_size
+from train_full import FinalMLP, block_size, itos
 
 device = torch.device('cpu')
 model = FinalMLP()
@@ -32,3 +32,8 @@ torch.onnx.export(model,               # model being run
                  output_names = ['output'], # the model's output names
 )
 
+# Export dict to JSON
+import json
+
+with open('itos.json', 'w', encoding='utf-8') as f:
+    json.dump(itos, f, indent=2, ensure_ascii=False)
