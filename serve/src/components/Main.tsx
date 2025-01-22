@@ -1,4 +1,11 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { NameGenerator } from "@/model";
 import { MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
@@ -14,7 +21,7 @@ export function Main() {
   const generateCities = async () => {
     try {
       const generator = new NameGenerator("jp_cities_model.onnx");
-      const names = await generator.generateNames(5);
+      const names = await generator.generateNames(10);
       setCities(names.map(processName));
     } catch (err) {
       console.error("Error generating names:", err);
@@ -25,48 +32,54 @@ export function Main() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 space-y-6">
-        <div className="text-center space-y-2">
-          <div className="flex justify-center">
-            <MapPin className="h-12 w-12 text-red-500" />
+    <div className="min-h-screen bg-background dark:bg-slate-950 flex items-center justify-center p-4">
+      <Card className="max-w-md w-full dark:bg-slate-900 dark:border-slate-800">
+        <CardHeader>
+          <div className="flex flex-col items-center gap-2">
+            <MapPin className="h-10 w-10 dark:text-slate-200" />
+            <h1 className="text-2xl font-semibold dark:text-slate-200">
+              Japanese City Explorer
+            </h1>
+            <p className="text-sm text-muted-foreground dark:text-slate-400">
+              Discover cities across Japan
+            </p>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Japanese City Explorer
-          </h1>
-          <p className="text-gray-600">
-            Discover beautiful cities across Japan
-          </p>
-        </div>
+        </CardHeader>
 
-        <div className="space-y-4">
-          <button
+        <CardContent className="space-y-4">
+          <Button
             onClick={generateCities}
             disabled={isGenerating}
-            className="w-full py-3 px-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg 
-                     shadow-md hover:from-red-600 hover:to-red-700 transition-all duration-200 
-                     flex items-center justify-center space-x-2 disabled:opacity-50"
+            className="w-full"
+            variant="default"
           >
-            <Sparkles className="h-5 w-5" />
-            <span>{isGenerating ? "Generating..." : "Generate Cities"}</span>
-          </button>
+            <Sparkles className="mr-2 h-4 w-4" />
+            {isGenerating ? "Generating..." : "Generate Cities"}
+          </Button>
 
           {cities.length > 0 && (
-            <div className="bg-gray-50 rounded-lg p-4 text-center animate-fade-in space-y-2">
-              <p className="text-lg font-medium text-gray-900">{cities[0]}</p>
+            <div className="space-y-2 animate-in fade-in">
+              <p className="text-lg font-medium dark:text-slate-200">
+                {cities[0]}
+              </p>
               {cities.slice(1).map((city, i) => (
-                <p key={i} className="text-md text-gray-500">
+                <p
+                  key={i}
+                  className="text-sm text-muted-foreground dark:text-slate-400"
+                >
                   {city}
                 </p>
               ))}
             </div>
           )}
-        </div>
+        </CardContent>
 
-        <div className="text-center text-sm text-gray-500">
-          <p>Click the button to discover random Japanese cities</p>
-        </div>
-      </div>
+        <CardFooter>
+          <p className="text-xs text-muted-foreground dark:text-slate-400 text-center w-full">
+            Click the button to discover random Japanese cities
+          </p>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
