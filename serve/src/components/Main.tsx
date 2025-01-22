@@ -81,7 +81,7 @@ export function Main() {
       </ProgressiveLoad>
       <div className="max-w-4xl w-full space-y-12 mt-32">
         <ProgressiveLoad key={cities[0]} delay={200}>
-          <h1 className="text-8xl font-light tracking-tighter text-center break-words">
+          <h1 className="text-6xl sm:text-8xl font-light tracking-tighter text-center break-words">
             {error || cities[0]}
           </h1>
         </ProgressiveLoad>
@@ -105,7 +105,7 @@ export function Main() {
             </Button>
           </ProgressiveLoad>
         </div>
-        <div className="text-4xl text-zinc-600 text-center grid grid-cols-2 md:grid-cols-3 gap-8 w-full tracking-tight">
+        <div className="text-2xl sm:text-4xl text-zinc-600 text-center grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full tracking-tight">
           {cities.slice(1).map((city, i) => (
             <ProgressiveLoad key={`${city}-${i}`} delay={500 + i * 100}>
               <div className="break-words">{city}</div>
@@ -113,6 +113,19 @@ export function Main() {
           ))}
         </div>
       </div>
+      <ProgressiveLoad
+        delay={600}
+        className="mt-auto pt-24 text-xs text-zinc-600 text-center w-full"
+      >
+        This model is a tiny (40K parameter){" "}
+        <a
+          href="https://en.wikipedia.org/wiki/Multilayer_perceptron"
+          className="underline"
+        >
+          multilayer perceptron
+        </a>{" "}
+        running fully locally using the ONNX Runtime.
+      </ProgressiveLoad>
     </div>
   );
 }

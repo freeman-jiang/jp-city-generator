@@ -21,6 +21,9 @@ block_size = 10
 
 dummy_input = torch.zeros(1, block_size, dtype=torch.long)  # batch_size=1, sequence_length=10
 
+# Print how many parameters the model has
+print(f"Model has {sum(p.numel() for p in model.parameters() if p.requires_grad):,} parameters")
+
 # Export the model
 torch.onnx.export(model,               # model being run
                  dummy_input,          # model input (or a tuple for multiple inputs)
