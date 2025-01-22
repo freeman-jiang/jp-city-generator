@@ -1,14 +1,8 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 import { NameGenerator } from "@/model";
-import { MapPin, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 const processName = (name: string) => {
   return name.charAt(0).toUpperCase() + name.slice(1, name.length - 1);
@@ -32,54 +26,33 @@ export function Main() {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-slate-950 flex items-center justify-center p-4">
-      <Card className="max-w-md w-full dark:bg-slate-900 dark:border-slate-800">
-        <CardHeader>
-          <div className="flex flex-col items-center gap-2">
-            <MapPin className="h-10 w-10 dark:text-slate-200" />
-            <h1 className="text-2xl font-semibold dark:text-slate-200">
-              Japanese City Explorer
-            </h1>
-            <p className="text-sm text-muted-foreground dark:text-slate-400">
-              Discover cities across Japan
-            </p>
-          </div>
-        </CardHeader>
+    <div className="min-h-screen bg-zinc-950 text-zinc-50 flex flex-col items-center p-8">
+      <div className="text-sm uppercase tracking-widest text-zinc-500">
+        Japanese City Name Generator
+      </div>
+      <div className="max-w-4xl w-full space-y-12 mt-32">
+        <h1 className="text-8xl font-light tracking-tighter text-center break-words">
+          {cities[0] || "Generate a name"}
+        </h1>
 
-        <CardContent className="space-y-4">
+        <div className="flex flex-col items-center space-y-12">
           <Button
             onClick={generateCities}
             disabled={isGenerating}
-            className="w-full"
-            variant="default"
+            className="w-48 h-12 flex items-center justify-center gap-2"
           >
-            <Sparkles className="mr-2 h-4 w-4" />
-            {isGenerating ? "Generating..." : "Generate Cities"}
+            <Sparkles size={16} />
+            {isGenerating ? "Generating..." : "Generate Names"}
           </Button>
-
-          {cities.length > 0 && (
-            <div className="space-y-2 animate-in fade-in">
-              <p className="text-lg font-medium dark:text-slate-200">
-                {cities[0]}
-              </p>
-              {cities.slice(1).map((city, i) => (
-                <p
-                  key={i}
-                  className="text-sm text-muted-foreground dark:text-slate-400"
-                >
-                  {city}
-                </p>
-              ))}
+        </div>
+        <div className="text-4xl text-zinc-500 text-center grid grid-cols-2 md:grid-cols-3 gap-8 w-full">
+          {cities.slice(1).map((city, i) => (
+            <div key={i} className="break-words">
+              {city}
             </div>
-          )}
-        </CardContent>
-
-        <CardFooter>
-          <p className="text-xs text-muted-foreground dark:text-slate-400 text-center w-full">
-            Click the button to discover random Japanese cities
-          </p>
-        </CardFooter>
-      </Card>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
