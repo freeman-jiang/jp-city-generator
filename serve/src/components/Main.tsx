@@ -3,27 +3,8 @@ import { NameGenerator } from "@/model";
 import { MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 
-// Curated list of Japanese cities with their regions
-const japaneseCities = [
-  "Tokyo (東京) - Kanto",
-  "Kyoto (京都) - Kansai",
-  "Osaka (大阪) - Kansai",
-  "Sapporo (札幌) - Hokkaido",
-  "Fukuoka (福岡) - Kyushu",
-  "Nagoya (名古屋) - Chubu",
-  "Yokohama (横浜) - Kanto",
-  "Kobe (神戸) - Kansai",
-  "Nara (奈良) - Kansai",
-  "Hiroshima (広島) - Chugoku",
-  "Sendai (仙台) - Tohoku",
-  "Kanazawa (金沢) - Chubu",
-  "Matsuyama (松山) - Shikoku",
-  "Nagasaki (長崎) - Kyushu",
-  "Kamakura (鎌倉) - Kanto",
-];
-
 const processName = (name: string) => {
-  return name.charAt(0).toUpperCase() + name.slice(1);
+  return name.charAt(0).toUpperCase() + name.slice(1, name.length - 1);
 };
 
 export function Main() {

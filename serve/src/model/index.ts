@@ -120,8 +120,15 @@ export class NameGenerator {
       context = [...context.slice(1), ix];
       out.push(ix);
 
-      // Break if we generate the end token (0)
-      if (ix === 0) break;
+      // Break if we generate the end token (0) and have at least 3 chars
+      if (ix === 0) {
+        if (out.length > 3) {
+          break;
+        } else {
+          out.pop(); // Remove the . token
+          continue;
+        }
+      }
     }
 
     const result = out.map((i) => itos[i.toString()]).join("");
