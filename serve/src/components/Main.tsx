@@ -32,7 +32,7 @@ export function Main() {
       setTimeout(() => {
         setIsInitialLoading(false);
         setRegenerating(false);
-      }, 200);
+      }, 600);
     }
   };
 
@@ -42,7 +42,7 @@ export function Main() {
 
   if (isInitialLoading) {
     return (
-      <div className="min-h-screen bg-zinc-950 text-zinc-50 flex flex-col items-center p-8 justify-center">
+      <div className="min-h-screen flex flex-col items-center p-8 justify-center">
         <ProgressiveLoad duration={0.5}>
           <div className="flex flex-col items-center gap-4">
             <Loader2 className="h-12 w-12 animate-spin text-zinc-500" />
@@ -55,14 +55,14 @@ export function Main() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-zinc-950 text-zinc-50 flex flex-col items-center p-8 justify-center">
+      <div className="min-h-screen flex flex-col items-center p-8 justify-center">
         <div className="text-zinc-500">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 flex flex-col items-center p-8 selection:bg-zinc-800 selection:text-zinc-200">
+    <div className="min-h-screen flex flex-col items-center p-8 selection:bg-zinc-800 selection:text-zinc-200">
       <ProgressiveLoad>
         <div />
       </ProgressiveLoad>
@@ -80,7 +80,7 @@ export function Main() {
         </div>
       </ProgressiveLoad>
       <div className="max-w-4xl w-full space-y-12 mt-32">
-        <ProgressiveLoad delay={200}>
+        <ProgressiveLoad key={cities[0]} delay={200}>
           <h1 className="text-8xl font-light tracking-tighter text-center break-words">
             {error || cities[0]}
           </h1>
@@ -90,16 +90,24 @@ export function Main() {
           <ProgressiveLoad delay={400}>
             <Button
               onClick={generateCities}
-              className="w-48 h-12 flex items-center justify-center gap-2"
+              disabled={regenerating}
+              className={`w-48 h-12 flex items-center justify-center gap-2 transition-all duration-300 ${
+                regenerating
+                  ? "scale-95 opacity-70"
+                  : "hover:scale-105 hover:rotate-1"
+              }`}
             >
-              <Sparkles size={16} />
-              Make more
+              <Sparkles
+                className={`${regenerating ? "animate-ping" : ""}`}
+                size={16}
+              />
+              {regenerating ? "Generating..." : "Make more"}
             </Button>
           </ProgressiveLoad>
         </div>
         <div className="text-4xl text-zinc-600 text-center grid grid-cols-2 md:grid-cols-3 gap-8 w-full tracking-tight">
           {cities.slice(1).map((city, i) => (
-            <ProgressiveLoad key={i} delay={regenerating ? 0 : 500 + i * 100}>
+            <ProgressiveLoad key={`${city}-${i}`} delay={500 + i * 100}>
               <div className="break-words">{city}</div>
             </ProgressiveLoad>
           ))}
