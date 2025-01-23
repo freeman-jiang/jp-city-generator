@@ -1,6 +1,6 @@
 "use client";
 import { NameGenerator } from "@/model";
-import { Loader2, Sparkles } from "lucide-react";
+import { Github, Loader2, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ProgressiveLoad } from "./ProgressiveLoad";
 import { Button } from "./ui/button";
@@ -63,6 +63,18 @@ export function Main() {
 
   return (
     <div className="min-h-screen flex flex-col items-center p-8 selection:bg-zinc-800 selection:text-zinc-200">
+      <div className="absolute top-8 right-8">
+        <ProgressiveLoad>
+          <a
+            href="https://github.com/freeman-jiang/jp-city-generator"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-500 hover:text-zinc-300 transition-colors hidden sm:block"
+          >
+            <Github />
+          </a>
+        </ProgressiveLoad>
+      </div>
       <ProgressiveLoad>
         <div />
       </ProgressiveLoad>
