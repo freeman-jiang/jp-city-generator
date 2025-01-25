@@ -6,4 +6,7 @@ Implemented with a very simple 3-layer MLP in PyTorch closely following the [Ben
 
 <img width="1496" alt="image" src="https://github.com/user-attachments/assets/3b60bd8b-5569-4ba8-b29e-5453437dec51" />
 
-Training Source: https://github.com/nobuf/list-of-cities-in-japan/blob/master/build/cities_in_japan_2023.csv
+Training Sources:
+
+- Japanese Cities: https://github.com/nobuf/list-of-cities-in-japan/blob/master/build/cities_in_japan_2023.csv
+- Chinese Cities: https://github.com/qwd/LocationList/blob/master/China-City-List-latest.csv
